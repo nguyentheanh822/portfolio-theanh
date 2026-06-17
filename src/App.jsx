@@ -1,49 +1,45 @@
-import { useEffect } from 'react'
-import Header from './components/Header'
-import Hero from './components/Hero'
+import { useState } from 'react'
+import Home from './components/Home'
+import Navigation from './components/Navigation'
+import About from './components/About'
+import Experience from './components/Experience'
+import Education from './components/Education'
 import Projects from './components/Projects'
 import Skills from './components/Skills'
-import Footer from './components/Footer'
+import Contact from './components/Contact'
 
-export default function App() {
-  /* Intersection Observer for scroll-triggered fade-up animations */
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible')
-            observer.unobserve(entry.target)
-          }
-        })
-      },
-      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
-    )
+function App() {
+  const [currentPage, setCurrentPage] = useState('home')
 
-    document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
+  const renderPage = () => {
+    switch (currentPage) {
+      case 'home':
+        return <Home onNavigate={setCurrentPage} />
+      case 'about':
+        return <About />
+      case 'experience':
+        return <Experience />
+      case 'education':
+        return <Education />
+      case 'projects':
+        return <Projects />
+      case 'skills':
+        return <Skills />
+      case 'contact':
+        return <Contact />
+      default:
+        return <Home onNavigate={setCurrentPage} />
+    }
+  }
 
   return (
-    <>
-      {/* Ambient background orbs */}
-      <div className="ambient-bg" aria-hidden="true">
-        <div className="ambient-orb ambient-orb--1" />
-        <div className="ambient-orb ambient-orb--2" />
-        <div className="ambient-orb ambient-orb--3" />
-      </div>
-
-      {/* Noise overlay */}
-      <div className="noise-overlay" aria-hidden="true" />
-
-      {/* Main content */}
-      <Header />
-      <Hero />
-      <div className="section-divider" />
-      <Projects />
-      <div className="section-divider" />
-      <Skills />
-      <Footer />
-    </>
+    <div className="app-container">
+      {currentPage !== 'home' && <Navigation onNavigate={setCurrentPage} />}
+      <main>
+        {renderPage()}
+      </main>
+    </div>
   )
 }
+
+export default App

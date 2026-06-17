@@ -1,5 +1,3 @@
-import ProjectCard from './ProjectCard'
-
 const projects = [
   {
     tag: 'NLP / Real-time',
@@ -13,7 +11,6 @@ const projects = [
     ],
     techs: ['FastAPI', 'WebSocket', 'Whisper', 'Gemini LLM', 'Piper TTS', 'Python'],
     githubUrl: 'https://github.com/nguyentheanh822',
-    accentColor: '#64b5f6',
     videoSrc: '/Demo_Audio-based_LLM.mp4',
   },
   {
@@ -28,7 +25,6 @@ const projects = [
     ],
     techs: ['CLIP', 'PaddleOCR', 'Whisper', 'Faiss', 'AutoShot', 'Python'],
     githubUrl: 'https://github.com/nguyentheanh822',
-    accentColor: '#a78bfa',
     imageSrc: '/Demo_VR.jpg',
   },
   {
@@ -43,28 +39,69 @@ const projects = [
     ],
     techs: ['PyTorch', 'MediaPipe', 'Transformer', 'GRU', 'BiLSTM', 'ST-GCN'],
     githubUrl: 'https://github.com/nguyentheanh822',
-    accentColor: '#34d399',
     videoSrc: '/Demo_SLT.mp4',
   },
 ]
 
 export default function Projects() {
   return (
-    <section className="section" id="projects">
-      <div className="container">
-        <p className="section__label fade-up">
-          <span className="section__label-line" />
-          Dự án nổi bật
-        </p>
-        <h2 className="section__title fade-up">
-          Những gì mình đã xây dựng
-        </h2>
-        <div className="projects-grid stagger">
-          {projects.map((p, i) => (
-            <ProjectCard key={i} {...p} />
-          ))}
-        </div>
+    <div className="page-container page-transition">
+      <header className="page-header">
+        <h1>Selected <span className="accent">Works</span></h1>
+      </header>
+
+      <div className="content-section">
+        {projects.map((p, i) => (
+          <article className="project-card" key={i}>
+            <div className="project-card__media">
+              {p.videoSrc ? (
+                <video
+                  className="project-card__video"
+                  src={p.videoSrc}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                />
+              ) : p.imageSrc ? (
+                <img
+                  className="project-card__image"
+                  src={p.imageSrc}
+                  alt={p.name}
+                  loading="lazy"
+                />
+              ) : null}
+            </div>
+            
+            <div className="project-card__info">
+              <div className="content-label" style={{ marginBottom: '16px' }}>{p.tag}</div>
+              
+              <div className="project-card__header">
+                <h2 className="project-card__title">{p.name}</h2>
+                {p.githubUrl && (
+                  <a href={p.githubUrl} target="_blank" rel="noopener noreferrer" className="project-card__link">
+                    GitHub Repo
+                  </a>
+                )}
+              </div>
+              
+              <p className="content-desc" style={{ marginBottom: '16px' }}>{p.description}</p>
+              
+              <ul className="content-list">
+                {p.highlights.map((h, j) => (
+                  <li key={j}>{h}</li>
+                ))}
+              </ul>
+              
+              <div className="project-card__techs">
+                {p.techs.map(t => (
+                  <span className="tech-tag" key={t}>{t}</span>
+                ))}
+              </div>
+            </div>
+          </article>
+        ))}
       </div>
-    </section>
+    </div>
   )
 }

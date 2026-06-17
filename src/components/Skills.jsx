@@ -1,40 +1,45 @@
-const skillGroups = [
-  {
-    title: 'Languages',
-    items: ['Python', 'C', 'C++', 'Java', 'JavaScript'],
-  },
-  {
-    title: 'AI / ML Frameworks',
-    items: ['PyTorch', 'TensorFlow', 'LlamaIndex', 'LangChain'],
-  },
-  {
-    title: 'Web & Tools',
-    items: ['FastAPI', 'Flask', 'Gradio', 'Faiss', 'Qdrant', 'Milvus', 'Git', 'GitHub', 'GitLab CI/CD', 'Docker'],
-  },
-]
-
 export default function Skills() {
   return (
-    <section className="section" id="skills">
-      <div className="container">
-        <p className="section__label fade-up">
-          <span className="section__label-line" />
-          Kỹ năng
-        </p>
-        <h2 className="section__title fade-up">Công nghệ & Công cụ</h2>
-        <div className="skills-grid stagger">
-          {skillGroups.map(g => (
-            <div className="skill-card fade-up" key={g.title}>
-              <h3 className="skill-card__title">{g.title}</h3>
-              <div className="skill-card__items">
-                {g.items.map(item => (
-                  <span className="skill-item" key={item}>{item}</span>
-                ))}
-              </div>
-            </div>
-          ))}
+    <div className="page-container page-transition">
+      <header className="page-header">
+        <h1>Tech <span className="accent">Skills</span></h1>
+      </header>
+
+      <div className="content-section">
+        <div className="content-row">
+          <div className="content-label">Languages</div>
+          <div>
+            <div className="content-subtitle">English (Professional), Vietnamese (Native)</div>
+          </div>
+        </div>
+
+        <div className="content-row">
+          <div className="content-label">Programming</div>
+          <div className="project-card__techs" style={{ marginTop: 0 }}>
+            {['Python', 'C', 'C++', 'Java', 'JavaScript'].map(t => (
+              <span className="tech-tag" key={t}>{t}</span>
+            ))}
+          </div>
+        </div>
+
+        <div className="content-row">
+          <div className="content-label">Frameworks & Libraries</div>
+          <div className="project-card__techs" style={{ marginTop: 0 }}>
+            {['PyTorch', 'TensorFlow', 'LlamaIndex', 'LangChain', 'FastAPI', 'Flask', 'React', 'Gradio'].map(t => (
+              <span className="tech-tag" key={t}>{t}</span>
+            ))}
+          </div>
+        </div>
+
+        <div className="content-row">
+          <div className="content-label">Tools & Infrastructure</div>
+          <div className="project-card__techs" style={{ marginTop: 0 }}>
+            {['Faiss', 'Qdrant', 'Milvus', 'Git', 'GitHub', 'GitLab CI/CD', 'Docker'].map(t => (
+              <span className="tech-tag" key={t}>{t}</span>
+            ))}
+          </div>
         </div>
       </div>
-    </section>
+    </div>
   )
 }
